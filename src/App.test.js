@@ -1,6 +1,7 @@
 import React from 'react';
 import {render, fireEvent, cleanup} from 'react-testing-library';
 import 'jest-dom/extend-expect';
+import *as dom from 'dom-testing-library';
 import App from './App';
 
 afterEach(cleanup);
@@ -22,5 +23,15 @@ test('renders without crashing', () => {
   expect(results).not.toHaveLength(0);
   results.forEach(result => {
     expect(result.dataset.name).toContain("Capitan");
-  })
+    expect(dom.getByTestId(result, "addBtn")).toBeTruthy();
+  });
+
+  const buttonRes = getByTestId("addBtn");
+  fireEvent.click(buttonRes);
+
+  expect(getByTestId("characters")).not.toHaveTextContent("No characters");
+  const characters = queryAllByTestId("character");
+  expect(characters).toHaveLength(1);
+  expect(characters[0]).toHaveTextContent(results[0].dataset.name);
+
 });
