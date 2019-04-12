@@ -1,27 +1,36 @@
 import React, { Component } from 'react';
 // import './App.css';
+const apiKey = '12c6063d7258c4af518b5c102682901f';
+const searchURL = 'https://gateway.marvel.com:443/v1/public/characters?apikey=';
 
 class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
       results: null,
-      query: ""
+      query: "",
+      loading: false
     }
     this.search = this.search.bind(this);
     this.saveQuery = this.saveQuery.bind(this);
   }
 
   search(event) {
-    const query = this.state.query;
-    const results = [
-      {id: query + 'id1', name: query + "1"},
-      {id: query + 'id2', name: query + "2"},
-    ];
     event.preventDefault();
+    const query = this.state.query;
     this.setState({
-      results
+      loading: true
     });
+
+    window.fetch(searchURL + apiKey + '&nameStartsWith=' + encodeURIComponent(query))
+      .then(response => response.json())
+      .then(json => {
+        console.log('request', json);
+        this.setState({
+          results: json.data.results,
+          loading: false
+      })
+    })
   }
 
   saveQuery(event) {
@@ -39,6 +48,14 @@ class Search extends Component {
     ));
   }
 
+  renderResults() {
+    return(
+      this.state.results
+      ? <div data-testid="searchRes">{this.results()}</div>
+      : null
+    )
+  }
+
   render() {
     return (
       <div>
@@ -46,10 +63,7 @@ class Search extends Component {
           <input onChange={this.saveQuery} type="text" data-testid="search" required/>
           <button data-testid="searchBtn">Add</button>
         </form>
-        {this.state.results
-          ? <div data-testid="searchRes">{this.results()}</div>
-          : null
-        }
+        { this.state.loading ? <div data-testid="searchRes">Loading...</div> : this.renderResults() }
       </div>
     );
   }
