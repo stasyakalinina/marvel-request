@@ -1,8 +1,12 @@
 import React from 'react';
 
+const Character = (props) => {
+  return <div data-testid="character">{props.character.name}</div>
+};
+
 const ShowCharacters = (props) => (
   props.chars.map(character => (
-    <div key={character.id} data-testid="character">{character.name}</div>
+    <Character key={character.id} character={character}/>
   ))
 );
 

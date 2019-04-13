@@ -113,6 +113,14 @@ test('renders without crashing', async () => {
 
   await nextTick();
 
+  // Test that reqest was sent only once
+  expect(window.fetch).toBeCalledTimes(1);
+
+  // Test that reqest was sent with "nameStartsWith=Captain"
+  expect(window.fetch).toBeCalledWith(
+    expect.stringContaining("nameStartsWith=Captain")
+  );
+
   const results = queryAllByTestId("result");
   expect(results).not.toHaveLength(0);
   results.forEach(result => {
