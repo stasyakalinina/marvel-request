@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import './App.css';
+import './Search.css';
 const apiKey = '12c6063d7258c4af518b5c102682901f';
 const searchURL = 'https://gateway.marvel.com:443/v1/public/characters?apikey=';
 
@@ -41,17 +41,17 @@ class Search extends Component {
 
   results() {
     return this.state.results.map(r => (
-      <div key={r} data-testid="result" data-name={r.name}>
+      <div key={r} data-testid="result" data-name={r.name} className="search-result__item">
         {r.name}
-        <button data-testid="addBtn" onClick={() => this.props.add(r)}>Add</button>
-    </div>
+        <button data-testid="addBtn" className="search-result__btn" onClick={() => this.props.add(r)}>Add</button>
+      </div>
     ));
   }
 
   renderResults() {
     return(
       this.state.results
-      ? <div data-testid="searchRes">{this.results()}</div>
+      ? <div data-testid="searchRes" className="search-result__list">{this.results()}</div>
       : null
     )
   }
@@ -59,11 +59,11 @@ class Search extends Component {
   render() {
     return (
       <div>
-        <form onSubmit = {this.search}>
-          <input onChange={this.saveQuery} type="text" data-testid="search" required/>
-          <button data-testid="searchBtn">Add</button>
+        <form onSubmit = {this.search} className="search-form">
+          <input onChange={this.saveQuery} type="text" data-testid="search" className="search-field" placeholder="Enter character name ..." required/>
+          <button data-testid="searchBtn" className="search-btn">Search</button>
         </form>
-        { this.state.loading ? <div data-testid="searchRes">Loading...</div> : this.renderResults() }
+        { this.state.loading ? <div data-testid="searchRes" className="search-result__loading">Loading...</div> : this.renderResults() }
       </div>
     );
   }

@@ -1,0 +1,46 @@
+.header {
+  width: 100%;
+  padding: 30px 0 70px;
+  color: #ffffff;
+  background-color: #0C0743;
+  background-image: url('img/sky-texture.jpg');
+  background-repeat: repeat;
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__title {
+  margin: 0;
+  font-weight: 600;
+  font-size: 36px;
+  letter-spacing: 0.02em;
+}
+
+.header__icon-list {
+  display: flex;
+  justify-content: space-between;
+  width: 140px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: #ffffff;
+}
+
+.header__icon-link {
+  display: inline-block;
+  /* margin: 0 14px 0 0; */
+}
+
+.header__icon-link:hover path,
+.header__icon-link:hover g {
+  fill: rgba(255, 255, 255, 0.6);
+}
+
+.header__icon-link:active path,
+.header__icon-link:active g {
+  fill: rgba(255, 255, 255, 0.8);
+}

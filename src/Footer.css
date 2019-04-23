@@ -1,0 +1,13 @@
+.footer {
+  width: 100%;
+  padding: 65px 0 20px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #0C0743;
+  background-image: url('img/sky-texture.jpg');
+  background-repeat: repeat;
+}
+
+.footer__text {
+  margin: 0;
+}
