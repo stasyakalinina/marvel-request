@@ -44,3 +44,52 @@
 .header__icon-link:active g {
   fill: rgba(255, 255, 255, 0.8);
 }
+
+@media (max-width: 1279px) {
+  .header__title  {
+    margin-left: 4%;
+  }
+
+  .header__icon-list {
+    margin-right: 4%;
+  }
+}
+
+@media (max-width: 899px) {
+  .header {
+    padding: 25px 0 53px;
+  }
+
+  .header__title {
+    font-size: 30px;
+  }
+
+  .header__icon-list {
+    width: 120px;
+  }
+
+  .header__icon-link svg {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 767px) {
+  .header {
+    width: 100%;
+    padding: 25px 15px;
+    text-align: center;
+  }
+  .header .container {
+    display: block;
+  }
+
+  .header__title {
+    margin: 0 auto 15px;
+    font-size: 22px;
+  }
+
+  .header__icon-list {
+    margin: 0 auto;
+  }
+}
