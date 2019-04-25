@@ -1,3 +1,9 @@
+/* .App {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+} */
+
 .content {
   width: 100%;
   background-color: #ffffff;
@@ -6,7 +12,8 @@
 .container--content {
   position: relative;
   width: 100%;
-  min-height: 80vh;
+  min-height: calc(87vh - 177px);
+  height: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 45px 23px;
@@ -44,6 +51,7 @@
 
 @media (max-width: 899px) {
   .container--content {
+    min-height: calc(87vh - 117px);
     padding: 0 35px 15px;
   }
 
@@ -61,6 +69,11 @@
 @media (max-width: 767px) {
   .content {
     width: 100%;
+  }
+
+  .container--content {
+    min-height: calc(87vh - 77px);
+    padding: 0 25px 15px;
   }
 
   .container--content::before,

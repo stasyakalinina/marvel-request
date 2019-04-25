@@ -110,6 +110,20 @@
   }
 
   .search-btn {
-    width: 225px;
+    width: 270px;
+    margin: 0;
+  }
+}
+
+@media (max-width: 448px) {
+  .search-result__item {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .search-result__btn {
+    margin: 7px 0 0;
+    padding: 3px 40px;
   }
 }
