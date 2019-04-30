@@ -25,7 +25,6 @@ class Search extends Component {
     window.fetch(searchURL + apiKey + '&nameStartsWith=' + encodeURIComponent(query))
       .then(response => response.json())
       .then(json => {
-        console.log('request', json);
         this.setState({
           results: json.data.results,
           loading: false

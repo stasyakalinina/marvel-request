@@ -139,4 +139,10 @@ test('renders without crashing', async () => {
   expect(dom.getByTestId(characters[0], "picture").src).toEqual(
     'http://i.annihil.us/u/prod/marvel/i/mg/3/50/537ba56d31087.jpg'
   );
+
+  //test remove characters
+  const removeBtn =  getByTestId("removeCharacter");
+  fireEvent.click(removeBtn);
+
+  expect(characters).not.toHaveLength(1);
 });
