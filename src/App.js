@@ -23,11 +23,11 @@ class App extends Component {
   }
 
   removeCharacter(character) {
-    const newCharacters = this.state.characters.filter(character => character.id !== character);
+    const newCharacters = this.state.characters.filter(card => card.id !== character);
+
     this.setState({
       characters: newCharacters
     });
-    console.log('work');
   }
 
   render() {

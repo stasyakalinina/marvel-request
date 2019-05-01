@@ -13,7 +13,7 @@ const Character = (props) => (
   <button
     data-testid="removeCharacter"
     className="character__close"
-    onClick={() => props.removeCharacter(props.character.id)}
+    onClick={ () => props.removeCharacter(props.character.id) }
     >
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 35 35">
         <circle cx="17.5" cy="17.5" r="16.5" fill="#E86165" stroke="#E86165" strokeWidth="2"/>
