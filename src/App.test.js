@@ -140,9 +140,24 @@ test('renders without crashing', async () => {
     'http://i.annihil.us/u/prod/marvel/i/mg/3/50/537ba56d31087.jpg'
   );
 
+  //check container for group characters and that it contains 3 elements
+  const cardGroup = queryAllByTestId("cardGroup");
+  expect(cardGroup).toHaveLength(1);
+  
+
   //test remove character
   const removeBtn =  getByTestId("removeCharacter");
   fireEvent.click(removeBtn);
 
-  // expect(characters).not.toHaveLength(1);
+  // check if array of characters do not contain card which we removed
+  const card = characters[0].dataset.id;
+  expect(characters).not.toContainEqual(card);
+
+  //check for slider buttons
+  // const btnPrevious = getByTestId("btnPrev");
+  // fireEvent.click(btnPrevious);
+  // const btnNext = getByTestId("btnNext");
+  // fireEvent.click(btnNext);
+
+
 });
