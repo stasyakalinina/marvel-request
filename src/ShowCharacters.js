@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import ArrowLeft from './ArrowLeft';
+import ArrowRight from './ArrowRight';
 
 const groupSize= 3;
 
@@ -42,14 +44,25 @@ class ShowCharacters extends Component {
     return groups;
   }
 
+  switchPage() {
+    console.log('we click!');
+  }
+
   renderPage(chars, page) {
     return (
-      <div data-testid="cardGroup" className="characters__list">
+      <div
+        data-testid="cardGroup"
+        className="characters__list"
+        key={page}
+        style={{display: page === this.state.page ? 'flex' : 'none'}}
+      >
+        <ArrowLeft style={{display: this.state.page !== 0  ? 'block' : 'none'}} onClick={this.switchPage} />
         {
-          chars.map(character => (
-            <Character key={character.id} character={character} removeCharacter={this.props.removeCharacter} />
+          chars.map(c => (
+            <Character key={c.id} character={c} removeCharacter={this.props.removeCharacter} />
           ))
         }
+        <ArrowRight style={{display: this.state.page !== 0  ? 'block' : 'none'}} onClick={this.switchPage} />
       </div>
     );
   }

@@ -141,9 +141,10 @@ test('renders without crashing', async () => {
   );
 
   //check container for group characters and that it contains 3 elements
-  const cardGroup = queryAllByTestId("cardGroup");
-  expect(cardGroup).toHaveLength(1);
-  
+  const cardGroup = getByTestId("cardGroup");
+  // expect(cardGroup).not.toHaveLength(4);
+  // expect(cardGroup).toContain(characters[0]);
+
 
   //test remove character
   const removeBtn =  getByTestId("removeCharacter");
