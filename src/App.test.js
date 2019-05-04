@@ -90,7 +90,7 @@ let capSearchResult = {
 afterEach(cleanup);
 
 test('renders without crashing', async () => {
-  const { getByTestId, queryByTestId, queryAllByTestId } = render(<App/>);
+  const { getByTestId, queryByTestId, queryAllByTestId, getAllByTestId } = render(<App/>);
   expect(getByTestId("characters")).toHaveTextContent("No characters");
   expect(getByTestId("search")).toBeTruthy();
   expect(getByTestId("searchBtn")).toBeTruthy();
@@ -116,7 +116,7 @@ test('renders without crashing', async () => {
   // Test that reqest was sent only once
   expect(window.fetch).toBeCalledTimes(1);
 
-  // Test that reqest was sent with "nameStartsWith=Captain"
+  //Expect that reqest was sent with "nameStartsWith=Captain"
   expect(window.fetch).toBeCalledWith(
     expect.stringContaining("nameStartsWith=Captain")
   );
@@ -128,8 +128,13 @@ test('renders without crashing', async () => {
     expect(dom.getByTestId(result, "addBtn")).toBeTruthy();
   });
 
+  //Add the first character
   const buttonRes = getByTestId("addBtn");
   fireEvent.click(buttonRes);
+
+  //Test that buttons for slider are not shown
+  const noButton = queryByTestId("btnNext");
+  expect(noButton).toBeNull();
 
   expect(getByTestId("characters")).not.toHaveTextContent("No characters");
   const characters = queryAllByTestId("character");
@@ -140,25 +145,30 @@ test('renders without crashing', async () => {
     'http://i.annihil.us/u/prod/marvel/i/mg/3/50/537ba56d31087.jpg'
   );
 
-  //check container for group characters and that it contains 3 elements
-  const cardGroup = getByTestId("cardGroup");
-  // expect(cardGroup).not.toHaveLength(4);
-  // expect(cardGroup).toContain(characters[0]);
+  //Add more characters (all 6): find all add buttons and press them and this add all characters
+  const buttons = getAllByTestId("addBtn");
+  buttons.slice(1, 6).forEach(item => fireEvent.click(item));
 
+  //Expect that only 3 shown
+  const visiblePage = getByTestId("page-visible");
+  const charactersNames = dom.getAllByTestId(visiblePage, "name").map(item => item.innerHTML);
+  expect(charactersNames).toEqual(["Captain America", "Captain Britain", "Captain Cross"]);
 
-  //test remove character
-  const removeBtn =  getByTestId("removeCharacter");
-  fireEvent.click(removeBtn);
+  //Expect that 3 are hidden
+  const invisiblePage = getByTestId("page-hidden");
+  const charactersNamesInvisible = dom.getAllByTestId(invisiblePage, "name").map(item => item.innerHTML);
+  expect(charactersNamesInvisible).toEqual(["Captain Flint", "Captain Marvel (Carol Danvers)", "Captain Universe"]);
 
-  // check if array of characters do not contain card which we removed
-  const card = characters[0].dataset.id;
-  expect(characters).not.toContainEqual(card);
-
-  //check for slider buttons
-  // const btnPrevious = getByTestId("btnPrev");
-  // fireEvent.click(btnPrevious);
-  // const btnNext = getByTestId("btnNext");
+  //Find and press ButtonRight
+  const btnNext = getByTestId("btnNext");
   // fireEvent.click(btnNext);
 
+  //Expect characters changed
 
+
+  //Find and press ButtonLeft
+  const btnPrevious = getByTestId("btnPrev");
+  // fireEvent.click(btnPrevious);
+
+  //Expect characters changed
 });

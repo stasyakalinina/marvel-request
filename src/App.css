@@ -49,6 +49,14 @@
   }
 }
 
+.visible {
+  display: flex;
+}
+
+.hidden {
+  display: none;
+}
+
 @media (max-width: 899px) {
   .container--content {
     min-height: calc(87vh - 117px);

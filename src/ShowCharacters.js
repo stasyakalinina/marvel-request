@@ -6,7 +6,7 @@ const groupSize= 3;
 
 const Character = (props) => (
   <div data-testid="character" className="character__card">
-    <h2 className="character__title">{props.character.name}</h2>
+    <h2 className="character__title" data-testid="name">{props.character.name}</h2>
     <img
       data-testid="picture"
       className="character__image"
@@ -32,7 +32,10 @@ class ShowCharacters extends Component {
     this.state = {
       page: 0
     }
+
+    this.switchPage = this.switchPage.bind(this);
   }
+
 
   groupChars() {
     let groups = [];
@@ -44,33 +47,40 @@ class ShowCharacters extends Component {
     return groups;
   }
 
+  getMaxPage() {
+    return parseInt(this.props.chars.length/groupSize);
+  }
+
   switchPage() {
-    console.log('we click!');
+    const maxPage = this.getMaxPage();
+    const nextPage = this.state.page >= maxPage ? 0 : this.state.page + 1;
+
+    this.setState({
+      page: nextPage
+    });
   }
 
   renderPage(chars, page) {
+    const show = page === this.state.page ? 'visible' : 'hidden';
     return (
-      <div
-        data-testid="cardGroup"
-        className="characters__list"
-        key={page}
-        style={{display: page === this.state.page ? 'flex' : 'none'}}
-      >
-        <ArrowLeft style={{display: this.state.page !== 0  ? 'block' : 'none'}} onClick={this.switchPage} />
+      <div className={`${show} characters__list`} data-testid={`page-${show}`} key={page}>
         {
           chars.map(c => (
             <Character key={c.id} character={c} removeCharacter={this.props.removeCharacter} />
           ))
         }
-        <ArrowRight style={{display: this.state.page !== 0  ? 'block' : 'none'}} onClick={this.switchPage} />
       </div>
     );
   }
 
   render() {
-    return this.groupChars().map(group => (
-      this.renderPage(group.chars, group.id)
-    ))
+    return (
+      <div>
+        {this.groupChars().map(group => (this.renderPage(group.chars, group.id)))}
+        {this.getMaxPage() > 0 ? <ArrowLeft /> : null}
+        {this.getMaxPage() > 0 ? <ArrowRight /> : null}
+      </div>
+    )
   }
 }
 

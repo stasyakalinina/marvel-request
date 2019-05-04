@@ -2,7 +2,7 @@ import React from 'react';
 import './Arrow.css';
 
 const ArrowRight = (props) => (
-  <button className="ArrowRight" onClick={props.switchPage}>
+  <button className="ArrowRight" onClick={props.switchPage} data-testid="btnNext">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 53 53">
       <circle cx="26.5" cy="26.5" r="25.5" stroke="#0C0743" strokeWidth="2"/>
       <path fill="#0C0743" d="M21 36.0232l9.5247-9.5455L21 16.9323 23.9323 14 36.41 26.4777 23.9323 38.9555 21 36.0232z"/>
